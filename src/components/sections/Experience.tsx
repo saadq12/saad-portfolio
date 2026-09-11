@@ -8,7 +8,7 @@ export function Experience() {
     <Section id="experience" label="experience-heading">
       <SectionHeading
         id="experience-heading"
-        eyebrow="// 05 — CAREER & ACADEMICS"
+        eyebrow="05 — CAREER & ACADEMICS"
         title="Experience, Education & Credentials"
         description="A timeline of industry roles, academic training in Computer Information Technology, and certified skills."
       />

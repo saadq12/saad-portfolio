@@ -18,7 +18,7 @@ export function SectionHeading({
   className,
   id,
 }: SectionHeadingProps) {
-  const formattedEyebrow = eyebrow.startsWith('//') ? eyebrow : `// ${eyebrow}`;
+  const formattedEyebrow = eyebrow.startsWith('//') ? eyebrow.slice(2).trim() : eyebrow;
 
   return (
     <div
@@ -32,9 +32,10 @@ export function SectionHeading({
         id={id}
         className="font-mono text-xs font-medium tracking-[0.18em] uppercase text-accent mb-3 flex items-center gap-2"
       >
+        <span aria-hidden="true">//</span>
         <span>{formattedEyebrow}</span>
       </div>
-      <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] leading-[1.05] text-text mb-4">
+      <h2 className="font-display text-[clamp(2rem,5vw,3.75rem)] font-semibold leading-[1.05] text-text mb-4">
         {title}
       </h2>
       {description && (

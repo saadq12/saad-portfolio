@@ -17,7 +17,6 @@ import { Services } from './components/sections/Services';
 import { Skills } from './components/sections/Skills';
 import { Projects } from './components/sections/Projects';
 import { Experience } from './components/sections/Experience';
-import { Testimonials } from './components/sections/Testimonials';
 import { Contact } from './components/sections/Contact';
 import { Button } from './components/ui/Button';
 import { Logo } from './components/ui/Logo';
@@ -94,6 +93,7 @@ export function App() {
       <ToastProvider>
         <CursorProvider>
           <div className="min-h-screen bg-bg text-text relative selection:bg-accent/20 selection:text-accent">
+            <a href="#main-content" className="skip-link">Skip to main content</a>
             {/* Grain Overlay */}
             <div className="bg-grain fixed inset-0 z-30 pointer-events-none opacity-60" aria-hidden="true" />
 
@@ -103,14 +103,13 @@ export function App() {
 
             <Navbar onOpenPalette={() => setIsPaletteOpen(true)} />
 
-            <main>
+            <main id="main-content" tabIndex={-1}>
               <Hero />
               <About />
               <Services />
               <Skills />
               <Projects />
               <Experience />
-              <Testimonials />
               <Contact />
             </main>
 

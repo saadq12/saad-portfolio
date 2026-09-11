@@ -6,7 +6,7 @@ import { Marquee } from '../ui/Marquee';
 import { TechIcon } from '../ui/TechIcon';
 import { SocialRow } from '../ui/SocialRow';
 import { profile, stats } from '../../data/portfolio';
-import { MapPin, GraduationCap, Briefcase, Zap, Download, Clock, ShieldCheck, Cpu, Coffee, Star } from 'lucide-react';
+import { MapPin, GraduationCap, Briefcase, Zap, Download, Clock, ShieldCheck, Cpu, Coffee } from 'lucide-react';
 import {
   SiHtml5,
   SiReact,
@@ -59,7 +59,7 @@ export function About() {
     <Section id="about" label="about-heading">
       <SectionHeading
         id="about-heading"
-        eyebrow="// 01 — ABOUT THE DEVELOPER"
+        eyebrow="01 — ABOUT THE DEVELOPER"
         title="Engineering Precision & Digital Strategy"
         description="Bridging front-end engineering, high-converting WordPress development, and data accuracy."
       />
@@ -120,10 +120,6 @@ export function About() {
             <div className="flex items-center gap-1.5 bg-surface/95 backdrop-blur-md border border-accent/30 rounded-full px-3 py-1.5 shadow-glow">
               <Coffee size={13} className="text-accent" />
               <span className="font-mono text-[10px] font-bold text-accent">Open to Work</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-surface/95 backdrop-blur-md border border-border rounded-full px-3 py-1.5 shadow-sm">
-              <Star size={12} className="text-amber-400" />
-              <span className="font-mono text-[10px] font-semibold text-text-dim">5★ Rating</span>
             </div>
           </div>
         </motion.div>

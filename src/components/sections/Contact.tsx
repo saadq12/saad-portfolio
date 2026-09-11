@@ -87,7 +87,7 @@ export function Contact() {
     <Section id="contact" label="contact-heading">
       <SectionHeading
         id="contact-heading"
-        eyebrow="// 07 — GET IN TOUCH"
+        eyebrow="06 — GET IN TOUCH"
         title="Let's Build Something Exceptional"
         description="Have an upcoming project, WordPress requirement, or IT inquiry? Send a direct message or connect instantly."
       />
@@ -132,15 +132,22 @@ export function Contact() {
               );
 
               return card.copyable ? (
-                <div key={card.key} onClick={handleCopyEmail} data-cursor="link">
+                <button
+                  key={card.key}
+                  type="button"
+                  onClick={handleCopyEmail}
+                  data-cursor="link"
+                  className="block w-full text-left focus-visible:outline-none"
+                  aria-label="Copy email address"
+                >
                   {inner}
-                </div>
+                </button>
               ) : (
                 <a
                   key={card.key}
                   href={card.href}
-                  target={card.key !== 'email' ? '_blank' : undefined}
-                  rel="noopener noreferrer"
+                  target={card.key === 'whatsapp' ? '_blank' : undefined}
+                  rel={card.key === 'whatsapp' ? 'noopener noreferrer' : undefined}
                   data-cursor="link"
                 >
                   {inner}
