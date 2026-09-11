@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#08090B" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F7F7F5" media="(prefers-color-scheme: light)" />
+    <title>Saad Qayyum — Front-End Developer &amp; IT Specialist</title>
+    <meta name="description" content="Front-End Developer, WordPress &amp; SEO specialist, and IT operations professional based in Gujranwala, Pakistan." />
+
+    <script>
+      (function() {
+        const t = localStorage.getItem('portfolio-theme');
+        const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (t === 'dark' || (!t && d)) document.documentElement.classList.add('dark');
+      })();
+    </script>
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://saadq-portfolio.vercel.app" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Saad Qayyum — Front-End Developer &amp; IT Specialist" />
+    <meta property="og:description" content="Front-End Developer, WordPress &amp; SEO specialist, and IT operations professional based in Gujranwala, Pakistan." />
+    <meta property="og:url" content="https://saadq-portfolio.vercel.app" />
+    <meta property="og:image" content="https://saadq-portfolio.vercel.app/og-image.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Saad Qayyum — Front-End Developer &amp; IT Specialist" />
+    <meta name="twitter:description" content="Front-End Developer, WordPress &amp; SEO specialist, and IT operations professional based in Gujranwala, Pakistan." />
+    <meta name="twitter:image" content="https://saadq-portfolio.vercel.app/og-image.png" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Saad Qayyum",
+      "jobTitle": "Front-End Developer & IT Specialist",
+      "url": "https://saadq-portfolio.vercel.app",
+      "email": "saadq3536@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Gujranwala", "addressCountry": "PK" },
+      "sameAs": [
+        "https://github.com/saadq12",
+        "https://www.linkedin.com/in/saad-qayyum-055965374/",
+        "https://www.instagram.com/saadq3536/",
+        "https://www.facebook.com/profile.php?id=100094138366344"
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-bg text-text selection:bg-accent/20 selection:text-accent font-sans antialiased overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

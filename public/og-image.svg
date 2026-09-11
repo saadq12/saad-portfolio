@@ -1,0 +1,27 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#08090B"/>
+
+  <!-- Faint Grid Pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#EDEEF0" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Accent Glow -->
+  <circle cx="1000" cy="150" r="300" fill="#4ADE9B" fill-opacity="0.08" filter="blur(80px)"/>
+
+  <!-- Logo Mark (80px) -->
+  <g transform="translate(80, 245)">
+    <rect x="0" y="0" width="80" height="80" rx="20" fill="#0D0F12" stroke="#EDEEF0" stroke-opacity="0.18" stroke-width="3"/>
+    <path d="M31.25 28.75C31.25 24.6075 35.8575 22.5 40 22.5C44.1425 22.5 47.5 24.6075 47.5 28.75C47.5 32.8925 44.1425 35 40 35C35.8575 35 31.25 37.1075 31.25 41.25C31.25 45.3925 35.8575 47.5 40 47.5C44.1425 47.5 47.5 45.3925 47.5 41.25" stroke="#EDEEF0" stroke-width="4.375" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="52.5" y="30" width="4.375" height="22.5" rx="2.1875" fill="#4ADE9B"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="185" y="295" fill="#EDEEF0" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="64" letter-spacing="-0.03em">Saad Qayyum</text>
+  <text x="185" y="340" fill="#9BA1A8" font-family="JetBrains Mono, monospace" font-size="24" letter-spacing="0.05em">front-end · wordpress · seo · it ops</text>
+  <text x="80" y="520" fill="#4ADE9B" font-family="JetBrains Mono, monospace" font-size="20" letter-spacing="0.15em">saadq-portfolio.vercel.app</text>
+</svg>
