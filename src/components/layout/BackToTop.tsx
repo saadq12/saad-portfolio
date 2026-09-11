@@ -11,7 +11,7 @@ export function BackToTop() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const height = document.documentElement.scrollHeight - window.innerHeight;
-      setVisible(scrollY > window.innerHeight * 0.8);
+      setVisible(scrollY > 600);
       if (height > 0) {
         setProgress(Math.min(1, Math.max(0, scrollY / height)));
       }

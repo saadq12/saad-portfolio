@@ -36,7 +36,7 @@ export function Services() {
     <Section id="services" label="services-heading">
       <SectionHeading
         id="services-heading"
-        eyebrow="02 — WHAT I DELIVER"
+        eyebrow="// 04 — WHAT I DELIVER"
         title="Solutions & Client Services"
         description="Comprehensive engineering services designed for business growth, lightning performance, and operational excellence."
       />

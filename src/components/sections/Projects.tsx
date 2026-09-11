@@ -31,7 +31,7 @@ export function Projects() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <SectionHeading
           id="projects-heading"
-          eyebrow="04 — FEATURED PORTFOLIO"
+          eyebrow="// 02 — FEATURED PORTFOLIO"
           title="Engineered Projects & Deployments"
           description="A showcase of real-world web applications, production e-commerce stores, and database architectures."
           className="mb-0"
@@ -65,7 +65,7 @@ export function Projects() {
             })}
           </div>
           <span className="font-mono text-[11px] text-text-faint">
-            Displaying {filteredProjects.length} of {projects.length} selected projects
+            Displaying {filteredProjects.length} of {projects.length} verified projects
           </span>
         </div>
       </div>
@@ -105,11 +105,6 @@ export function Projects() {
                             <span className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded-full font-bold">
                               <Sparkles size={10} />
                               Featured
-                            </span>
-                          )}
-                          {project.status === 'archived' && (
-                            <span className="font-mono text-[10px] text-text-faint bg-surface-2 px-2 py-0.5 rounded-full border border-border">
-                              Academic / personal
                             </span>
                           )}
                         </div>
@@ -165,10 +160,10 @@ export function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-border bg-surface-2/60 px-3.5 text-xs font-bold text-text-dim transition-colors hover:border-accent hover:text-accent"
+                            aria-label={`View code repository for ${project.title}`}
+                            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-text-dim hover:border-accent hover:text-accent bg-surface-2/60 transition-colors"
                           >
                             <Code2 size={16} />
-                            <span>Source Code</span>
                           </a>
                         )}
                         {project.links.details && (

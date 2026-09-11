@@ -78,7 +78,7 @@ export const projects: Project[] = [
     title: 'Ibrahim Shopping',
     category: 'wordpress',
     featured: true,
-    description: 'Managed a live WooCommerce catalog, product operations, customer queries, and search visibility for a growing store.',
+    description: 'Full e-commerce store with products, payments, orders & plugin management.',
     stack: ['WordPress', 'WooCommerce', 'SEO'],
     thumbnail: {
       src: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&q=80&auto=format&fit=crop',
@@ -93,7 +93,7 @@ export const projects: Project[] = [
     id: 'react-image-gallery',
     title: 'React Image Gallery',
     category: 'react',
-    description: 'Built a responsive image search experience with dynamic API results and a focused mobile-first browsing flow.',
+    description: 'Responsive gallery with image search and dynamic API results.',
     stack: ['React.js', 'JavaScript', 'CSS', 'REST API'],
     thumbnail: {
       src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80&auto=format&fit=crop',
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     id: 'currency-converter',
     title: 'Currency Converter',
     category: 'web',
-    description: 'Created a fast utility that converts currencies from live exchange-rate data with clear error and loading states.',
+    description: 'Real-time currency conversion using a live exchange-rate API.',
     stack: ['HTML5', 'CSS3', 'JavaScript', 'Currency API'],
     thumbnail: {
       src: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600&q=80&auto=format&fit=crop',
@@ -123,7 +123,7 @@ export const projects: Project[] = [
     id: 'todo-app',
     title: 'Todo App',
     category: 'react',
-    description: 'Shipped a compact React task manager with predictable state updates and a responsive, distraction-free interface.',
+    description: 'Clean task manager with add/remove using React state.',
     stack: ['React.js', 'JavaScript', 'CSS3'],
     thumbnail: {
       src: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1600&q=80&auto=format&fit=crop',
@@ -138,7 +138,7 @@ export const projects: Project[] = [
     id: 'school-db',
     title: 'School Management Database',
     category: 'database',
-    description: 'Academic database project covering student records, fees, attendance, staff workflows, queries, and reports.',
+    description: 'GUI forms for students, fees, attendance, staff, queries & reports.',
     stack: ['MySQL', 'MongoDB', 'MS Access'],
     thumbnail: {
       src: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80&auto=format&fit=crop',
@@ -153,7 +153,7 @@ export const projects: Project[] = [
     id: 'scientific-calculator',
     title: 'Scientific Calculator',
     category: 'web',
-    description: 'Personal C++ exercise implementing trigonometry, logarithms, powers, factorials, and menu-driven interaction.',
+    description: 'Menu-driven calculator with trig, log, power & factorial functions.',
     stack: ['C++'],
     thumbnail: {
       src: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1600&q=80&auto=format&fit=crop',

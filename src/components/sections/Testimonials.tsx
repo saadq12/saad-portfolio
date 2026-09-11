@@ -4,7 +4,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { Section } from '../ui/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { testimonials } from '../../data/portfolio';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 export function Testimonials() {
@@ -37,7 +37,7 @@ export function Testimonials() {
     <Section id="testimonials" label="testimonials-heading">
       <SectionHeading
         id="testimonials-heading"
-        eyebrow="06 — ENDORSEMENTS"
+        eyebrow="// 06 — ENDORSEMENTS"
         title="Client Reviews & Recommendations"
         description="Direct feedback from team leads, business owners, and project stakeholders."
       />
@@ -50,6 +50,13 @@ export function Testimonials() {
                 <div className="glass-card rounded-2xl border border-border p-6 sm:p-10 text-center space-y-6 shadow-card relative overflow-hidden">
                   {/* Subtle ambient glow */}
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-accent/5 blur-3xl pointer-events-none" />
+
+                  {/* 5-Star Rating */}
+                  <div className="flex justify-center items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={17} className="text-amber-400 fill-amber-400" />
+                    ))}
+                  </div>
 
                   {/* Quote Icon */}
                   <Quote size={32} className="text-accent/30 mx-auto" />
