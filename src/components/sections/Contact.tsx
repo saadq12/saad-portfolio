@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare, Copy, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Check, CheckCircle2, Copy, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
+import { SiWhatsapp } from 'react-icons/si';
 import { Section } from '../ui/Section';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Button } from '../ui/Button';
@@ -11,298 +12,207 @@ import { useToast } from '../providers/ToastProvider';
 const CONTACT_CARDS = [
   {
     key: 'email',
-    icon: Mail,
-    label: 'Email',
-    sublabel: 'Click to copy',
-    value: socials.email,
+    label: 'Email me',
+    detail: socials.email,
+    hint: 'Best for project briefs',
     href: `mailto:${socials.email}`,
-    copyable: true,
-    color: 'text-blue-400',
-    bg: 'bg-blue-500/10',
-    border: 'border-blue-500/25 hover:border-blue-400/50',
-  },
-  {
-    key: 'whatsapp',
-    icon: MessageSquare,
-    label: 'WhatsApp Direct',
-    sublabel: 'Fast response',
-    value: '+92 303 3911463',
-    href: socials.whatsapp,
-    copyable: false,
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/10',
-    border: 'border-emerald-500/25 hover:border-emerald-400/50',
+    icon: Mail,
+    iconClass: 'bg-sky-400/10 text-sky-300 border-sky-400/20',
   },
   {
     key: 'phone',
-    icon: Phone,
-    label: 'Phone Call',
-    sublabel: 'Mon – Sat · PKT',
-    value: socials.phoneIntl,
+    label: 'Call me',
+    detail: socials.phoneIntl,
+    hint: 'Mon - Sat · PKT',
     href: `tel:${socials.phoneIntl}`,
-    copyable: false,
-    color: 'text-cyan-400',
-    bg: 'bg-cyan-500/10',
-    border: 'border-cyan-500/25 hover:border-cyan-400/50',
+    icon: Phone,
+    iconClass: 'bg-cyan-400/10 text-cyan-300 border-cyan-400/20',
   },
-];
+  {
+    key: 'whatsapp',
+    label: 'WhatsApp',
+    detail: 'Start a quick chat',
+    hint: 'Fast response',
+    href: socials.whatsapp,
+    icon: SiWhatsapp,
+    iconClass: 'bg-emerald-400/10 text-emerald-300 border-emerald-400/20',
+  },
+] as const;
 
 export function Contact() {
   const { copy } = useCopyToClipboard();
   const { showToast } = useToast();
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    honeypot: '',
-  });
+  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '', honeypot: '' });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleCopyEmail = async () => {
     const success = await copy(socials.email);
-    if (success) showToast('Copied email: saadq3536@gmail.com');
+    if (!success) return;
+    setCopied(true);
+    showToast('Email copied to clipboard');
+    window.setTimeout(() => setCopied(false), 2200);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     if (formData.honeypot) return;
     setStatus('submitting');
+
     try {
-      // Simulate form delivery
       await new Promise((resolve) => setTimeout(resolve, 900));
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '', honeypot: '' });
-      showToast('Your message has been sent successfully!');
+      showToast('Your message has been sent successfully');
     } catch {
       setStatus('error');
     }
   };
 
-  const inputClass =
-    'w-full rounded-xl border border-border bg-surface-2/70 backdrop-blur-sm px-4 py-3 text-sm text-text placeholder-text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-200';
+  const inputClass = 'w-full rounded-xl border border-border bg-bg/70 px-4 py-3.5 text-sm text-text placeholder:text-text-faint transition-all duration-200 focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/25';
+  const labelClass = 'block text-xs font-bold uppercase tracking-[0.14em] text-text-dim';
 
   return (
     <Section id="contact" label="contact-heading">
       <SectionHeading
         id="contact-heading"
         eyebrow="// 07 — GET IN TOUCH"
-        title="Let's Build Something Exceptional"
-        description="Have an upcoming project, WordPress requirement, or IT inquiry? Send a direct message or connect instantly."
+        title="Let's turn a good idea into useful work."
+        description="Tell me what you are building, fixing, or improving. I'll respond with a clear next step."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-
-        {/* Left Column: Direct Contact & Location Map */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="space-y-1.5">
-            <h3 className="font-display text-xl sm:text-2xl font-bold text-text">Direct Communication</h3>
-            <p className="font-mono text-xs text-accent">
-              // Typically replies within a few hours
-            </p>
-          </div>
-
-          {/* Quick Contact Cards */}
-          <div className="space-y-3">
-            {CONTACT_CARDS.map((card) => {
-              const Icon = card.icon;
-              const inner = (
-                <div
-                  className={`flex items-center justify-between p-4 rounded-xl border ${card.border} bg-surface/75 backdrop-blur-md transition-all duration-200 group cursor-pointer shadow-sm`}
-                >
-                  <div className="flex items-center gap-3.5 min-w-0">
-                    <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${card.bg} ${card.color}`}>
-                      <Icon size={19} strokeWidth={2} />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="font-mono text-[10px] uppercase tracking-wider text-text-faint">
-                        {card.label} · {card.sublabel}
-                      </div>
-                      <div className="font-bold text-sm text-text truncate group-hover:text-accent transition-colors">
-                        {card.value}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="text-text-faint group-hover:text-accent transition-colors pl-2 shrink-0">
-                    {card.copyable ? <Copy size={16} /> : <ArrowUpRight size={16} />}
-                  </div>
+      <div className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {CONTACT_CARDS.map((card) => {
+          const Icon = card.icon;
+          return (
+            <div key={card.key} className="group flex min-h-[232px] flex-col rounded-2xl border border-border bg-surface/75 p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-glow">
+              <div className="mb-6 flex items-start justify-between gap-3">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-105 ${card.iconClass}`}>
+                  <Icon size={22} aria-hidden="true" />
                 </div>
-              );
-
-              return card.copyable ? (
-                <div key={card.key} onClick={handleCopyEmail} data-cursor="link">
-                  {inner}
-                </div>
-              ) : (
-                <a
-                  key={card.key}
-                  href={card.href}
-                  target={card.key !== 'email' ? '_blank' : undefined}
-                  rel="noopener noreferrer"
-                  data-cursor="link"
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-bg/40 text-text-faint transition-colors group-hover:border-accent/40 group-hover:text-accent" aria-hidden="true">
+                  <ArrowUpRight size={17} />
+                </span>
+              </div>
+              <a
+                href={card.href}
+                target={card.key === 'whatsapp' ? '_blank' : undefined}
+                rel={card.key === 'whatsapp' ? 'noopener noreferrer' : undefined}
+                aria-label={`${card.label}: ${card.detail}`}
+                className="block flex-1 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-bg"
+              >
+                <span className="block text-lg font-bold text-text transition-colors group-hover:text-accent">{card.label}</span>
+                <span className="mt-2 block truncate text-sm font-medium text-text-dim">{card.detail}</span>
+                <span className="mt-2 block text-xs text-text-faint">{card.hint}</span>
+              </a>
+              {card.key === 'email' && (
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  aria-label="Copy email address"
+                  className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-border-strong bg-surface-2 px-3 py-2.5 text-xs font-bold text-text transition-all hover:border-accent hover:bg-accent/10 hover:text-accent active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                 >
-                  {inner}
-                </a>
-              );
-            })}
+                  {copied ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}
+                  <span>{copied ? 'Copied' : 'Copy Email'}</span>
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
-            {/* Location & Timezone Card */}
-            <div className="flex items-center gap-3.5 p-4 rounded-xl border border-border bg-surface/60">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400">
-                <MapPin size={19} strokeWidth={2} />
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+        <div className="flex flex-col justify-between rounded-2xl border border-border bg-surface/55 p-6 sm:p-8">
+          <div>
+            <div className="mb-6 flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
+                <MessageCircle size={20} aria-hidden="true" />
               </div>
               <div>
-                <div className="font-mono text-[10px] uppercase tracking-wider text-text-faint">
-                  Location · Timezone PKT (UTC+5)
-                </div>
-                <div className="font-bold text-sm text-text">{socials.location}</div>
+                <h3 className="text-xl font-bold text-text">Let's talk</h3>
+                <p className="font-mono text-xs text-accent"><span aria-hidden="true">// </span>Usually replies within a few hours</p>
+              </div>
+            </div>
+            <p className="max-w-md text-sm leading-7 text-text-dim">
+              Whether you need a sharper front end, a better WordPress store, or help getting digital operations under control, send the details and I'll take it from there.
+            </p>
+            <div className="mt-6 flex items-center gap-3 rounded-xl border border-border bg-bg/50 p-4">
+              <MapPin size={18} className="shrink-0 text-accent" aria-hidden="true" />
+              <div>
+                <p className="text-xs uppercase tracking-wider text-text-faint">Based in</p>
+                <p className="mt-1 text-sm font-semibold text-text">{socials.location} · PKT (UTC+5)</p>
               </div>
             </div>
           </div>
-
-          {/* Social Media Links */}
-          <div className="pt-2 border-t border-border/50 space-y-2.5">
-            <span className="font-mono text-[10px] text-text-faint uppercase tracking-wider block">
-              // Socials & Repositories
-            </span>
+          <div className="mt-8 border-t border-border/70 pt-5">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-text-faint">Find me online</p>
             <SocialRow size={18} showLabels />
           </div>
         </div>
 
-        {/* Right Column: Interactive Contact Form */}
-        <div className="lg:col-span-7">
-          <div className="glass-card rounded-2xl border border-border p-6 sm:p-8 shadow-card">
-            {status === 'success' ? (
-              <div className="py-14 text-center space-y-5">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 text-accent mx-auto shadow-glow">
-                  <CheckCircle2 size={42} strokeWidth={1.75} />
-                </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-text">
-                  Message Dispatched!
-                </h3>
-                <p className="text-text-dim text-sm max-w-md mx-auto leading-relaxed">
-                  Thank you for reaching out. Your message has been received, and I will reply to your email directly.
-                </p>
-                <Button variant="outline" size="md" onClick={() => setStatus('idle')} className="font-mono text-xs">
-                  Send Another Message
-                </Button>
+        <div className="rounded-2xl border border-border bg-surface/80 p-6 shadow-card sm:p-8">
+          {status === 'success' ? (
+            <div className="flex min-h-[420px] flex-col items-center justify-center space-y-5 text-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent shadow-glow">
+                <CheckCircle2 size={42} strokeWidth={1.75} aria-hidden="true" />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-                <div>
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-text">Send a Message</h3>
-                  <p className="text-text-dim text-xs mt-1 font-mono">
-                    Fill in your details below and I&apos;ll get back to you promptly.
-                  </p>
+              <h3 className="text-2xl font-bold text-text sm:text-3xl">Message sent.</h3>
+              <p className="max-w-md text-sm leading-7 text-text-dim">Thanks for reaching out. I'll review your message and reply directly to your email.</p>
+              <Button variant="outline" size="md" onClick={() => setStatus('idle')} className="min-h-11">
+                Send another message
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5" aria-busy={status === 'submitting'}>
+              <div className="mb-1">
+                <h3 className="text-xl font-bold text-text sm:text-2xl">Send a project brief</h3>
+                <p className="mt-1 text-sm text-text-dim">A few details help me give you a useful first reply.</p>
+              </div>
+
+              <input
+                type="text"
+                name="honeypot"
+                value={formData.honeypot}
+                onChange={(event) => setFormData({ ...formData, honeypot: event.target.value })}
+                className="hidden"
+                tabIndex={-1}
+                aria-hidden="true"
+              />
+
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <label htmlFor="contact-name" className={labelClass}>Your name <span className="text-accent">*</span></label>
+                  <input id="contact-name" type="text" required value={formData.name} onChange={(event) => setFormData({ ...formData, name: event.target.value })} placeholder="Alex Morgan" className={inputClass} />
                 </div>
-
-                {/* Anti-bot honeypot */}
-                <input
-                  type="text"
-                  name="honeypot"
-                  value={formData.honeypot}
-                  onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
-                  className="hidden"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                />
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="contact-name"
-                      className="block font-mono text-xs font-semibold text-text-dim uppercase tracking-wider"
-                    >
-                      Your Name *
-                    </label>
-                    <input
-                      id="contact-name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Alex Morgan"
-                      className={inputClass}
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="contact-email"
-                      className="block font-mono text-xs font-semibold text-text-dim uppercase tracking-wider"
-                    >
-                      Your Email *
-                    </label>
-                    <input
-                      id="contact-email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="e.g. alex@example.com"
-                      className={inputClass}
-                    />
-                  </div>
+                <div className="space-y-2">
+                  <label htmlFor="contact-email" className={labelClass}>Your email <span className="text-accent">*</span></label>
+                  <input id="contact-email" type="email" required value={formData.email} onChange={(event) => setFormData({ ...formData, email: event.target.value })} placeholder="alex@example.com" className={inputClass} />
                 </div>
+              </div>
 
-                <div className="space-y-1.5">
-                  <label
-                    htmlFor="contact-subject"
-                    className="block font-mono text-xs font-semibold text-text-dim uppercase tracking-wider"
-                  >
-                    Subject / Project Scope *
-                  </label>
-                  <input
-                    id="contact-subject"
-                    type="text"
-                    required
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="e.g. React Frontend Development or WordPress Store"
-                    className={inputClass}
-                  />
-                </div>
+              <div className="space-y-2">
+                <label htmlFor="contact-subject" className={labelClass}>Project or subject <span className="text-accent">*</span></label>
+                <input id="contact-subject" type="text" required value={formData.subject} onChange={(event) => setFormData({ ...formData, subject: event.target.value })} placeholder="React frontend, WordPress store, or IT support" className={inputClass} />
+              </div>
 
-                <div className="space-y-1.5">
-                  <label
-                    htmlFor="contact-message"
-                    className="block font-mono text-xs font-semibold text-text-dim uppercase tracking-wider"
-                  >
-                    Your Message *
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe your project goals, required deliverables, timeline, or questions..."
-                    className={`${inputClass} resize-none`}
-                  />
-                </div>
+              <div className="space-y-2">
+                <label htmlFor="contact-message" className={labelClass}>What can I help with? <span className="text-accent">*</span></label>
+                <textarea id="contact-message" required rows={5} value={formData.message} onChange={(event) => setFormData({ ...formData, message: event.target.value })} placeholder="Share your goals, deliverables, timeline, or questions..." className={`${inputClass} resize-y`} />
+              </div>
 
-                {status === 'error' && (
-                  <p className="text-rose-400 text-xs font-mono">
-                    Failed to send. Please reach out directly to saadq3536@gmail.com
-                  </p>
-                )}
+              {status === 'error' && <p role="alert" className="rounded-xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm font-medium text-rose-300">Something went wrong. Please email {socials.email} directly.</p>}
 
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  disabled={status === 'submitting'}
-                  className="w-full shadow-glow hover:shadow-glow-lg font-bold"
-                >
-                  <span>{status === 'submitting' ? 'Dispatching Message...' : 'Send Message'}</span>
-                  <Send size={15} />
-                </Button>
-              </form>
-            )}
-          </div>
+              <button
+                type="submit"
+                disabled={status === 'submitting'}
+                className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-bold text-bg shadow-glow transition-all hover:bg-accent/90 hover:shadow-glow-lg active:scale-[0.99] disabled:cursor-wait disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-bg"
+              >
+                <span>{status === 'submitting' ? 'Sending message...' : 'Send message'}</span>
+                {status === 'submitting' ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-bg/30 border-t-bg" aria-label="Loading" /> : <Send size={17} aria-hidden="true" />}
+              </button>
+            </form>
+          )}
         </div>
-
       </div>
     </Section>
   );
